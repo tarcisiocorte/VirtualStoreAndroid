@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.tarcisio.bo.*;
 
-public class Login extends Activity {
+public class LoginActivity extends Activity {
 
 	private LoginBO loginBO;
 
@@ -24,6 +24,9 @@ public class Login extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		edtLogin = (EditText) findViewById(R.id.edt_login);
+		edtSenha = (EditText) findViewById(R.id.edt_senha);
 	}
 
 	@Override
@@ -39,7 +42,8 @@ public class Login extends Activity {
 
 	private class LoadingAsync extends AsyncTask<Void, Void, String> {
 
-		private ProgressDialog progressDialog = new ProgressDialog(Login.this);
+		private ProgressDialog progressDialog = new ProgressDialog(
+				LoginActivity.this);
 
 		@Override
 		protected void onPreExecute() {
@@ -50,7 +54,8 @@ public class Login extends Activity {
 		protected String doInBackground(Void... params) {
 			String login = edtLogin.getText().toString();
 			String senha = edtSenha.getText().toString();
-			loginBO = new LoginBO(Login.this);
+			loginBO = new LoginBO(LoginActivity.this);			
+			
 			return loginBO.validateLogin(login, senha);
 		}
 
@@ -58,7 +63,9 @@ public class Login extends Activity {
 		protected void onPostExecute(String msg) {
 			progressDialog.dismiss();
 			if (msg == null) {
-				Intent i = new Intent(Login.this, DashboardActivity.class);
+				Intent i = new Intent(LoginActivity.this,
+						DashboardActivity.class);
+				
 				startActivity(i);
 				finish();
 			} else {

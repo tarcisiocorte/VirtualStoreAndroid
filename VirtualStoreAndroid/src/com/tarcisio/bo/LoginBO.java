@@ -12,6 +12,8 @@ public class LoginBO {
 	}
 
 	public String validateLogin(String login, String senha) {
+		
+		
 		if (login == null || login.equals("")) {
 			return "";
 		} else if (senha == null || senha.equals("")) {

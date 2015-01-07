@@ -5,7 +5,7 @@
     android:background="@drawable/app_background"
     android:orientation="vertical"
     android:padding="@dimen/padding_large"
-    tools:context="com.tarcisio.virtualstoreandroid.Login" >
+    tools:context="com.tarcisio.virtualstoreandroid.LoginActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
