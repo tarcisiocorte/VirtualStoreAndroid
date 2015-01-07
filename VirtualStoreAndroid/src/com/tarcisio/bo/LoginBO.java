@@ -15,9 +15,9 @@ public class LoginBO {
 		
 		
 		if (login == null || login.equals("")) {
-			return "";
+			return "Login é obrigatório";
 		} else if (senha == null || senha.equals("")) {
-			return "";
+			return "Senha é obrigatório";
 		}
 		return null;
 	}

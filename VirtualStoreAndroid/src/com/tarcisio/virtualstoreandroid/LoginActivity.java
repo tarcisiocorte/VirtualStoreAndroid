@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.tarcisio.bo.*;
+import com.tarcisio.util.Messages;
 
 public class LoginActivity extends Activity {
 
@@ -60,18 +61,17 @@ public class LoginActivity extends Activity {
 		}
 
 		@Override
-		protected void onPostExecute(String msg) {
+		protected void onPostExecute(String message) {
 			progressDialog.dismiss();
-			if (msg == null) {
+			if (message == null) {
 				Intent i = new Intent(LoginActivity.this,
 						DashboardActivity.class);
 				
 				startActivity(i);
 				finish();
 			} else {
-				// MensagemUtil.addMsg(LoginActivity.this, msg);
+				Messages.AddMessage(LoginActivity.this, message);
 			}
 		}
-
 	}
 }
