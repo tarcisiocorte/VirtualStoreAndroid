@@ -1,16 +1,18 @@
 package com.tarcisio.virtualstoreandroid;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
 import com.tarcisio.bo.*;
 
-public class Login extends ActionBarActivity {
+public class Login extends Activity {
 
 	private LoginBO loginBO;
 
@@ -32,7 +34,7 @@ public class Login extends ActionBarActivity {
 	}
 
 	public void logar(View view) {
-
+		new LoadingAsync().execute();
 	}
 
 	private class LoadingAsync extends AsyncTask<Void, Void, String> {
@@ -52,17 +54,17 @@ public class Login extends ActionBarActivity {
 			return loginBO.validateLogin(login, senha);
 		}
 
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		@Override
+		protected void onPostExecute(String msg) {
+			progressDialog.dismiss();
+			if (msg == null) {
+				Intent i = new Intent(Login.this, DashboardActivity.class);
+				startActivity(i);
+				finish();
+			} else {
+				// MensagemUtil.addMsg(LoginActivity.this, msg);
+			}
 		}
-		return super.onOptionsItemSelected(item);
+
 	}
 }
